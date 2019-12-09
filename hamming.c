@@ -12,7 +12,7 @@ int main(){
 	printf("Qual a paridade? 1-IMPAR ou 0-PAR:\n");
 	scanf("%d", &esc_parity);
 
-	/*2 r ≥ m + r + 1 (Fórmula)
+	/*2 ^ r ≥ m + r + 1 (Fórmula)
 	>Onde r é o número de bits redudantes
 	>m é número de bits de dados
 	*/
