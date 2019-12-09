@@ -176,11 +176,8 @@ int main(){
     if(flag==0)
     {
         int pos=0;
-    printf("Erro detectado em:\n");
     for(i =r-1;i>=0;i--)
     {
-        printf("%d", err[i]);
-
         if(err[i]==1)
             pos+=pow(2,i);
     }
