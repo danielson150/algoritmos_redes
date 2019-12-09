@@ -35,21 +35,21 @@ int main(){
 	}
 
 	int data[m + r], res[m+r];
-    d = 0;
-    d1 = 1;
+	d = 0;
+	d1 = 1;
 	for (i = 1; i <= m + r; i++)
-    {
-      if ((i) == pow (2, d))
+    	{
+      	if ((i) == pow (2, d))
         {
         data[i] = 0;
         d++;
         }
-      else
+      	else
         {
         data[i] = c[d1];
         d1++;
         }
-    }
+    	}
 
 	/*printf("\nOs bits de dados são codificados com bits de paridade(0):\n");
 	for(i=1; i<=m+r;i++){
@@ -57,7 +57,7 @@ int main(){
 	}*/
 
 	d1 = 0;
-    int min, max = 0, parity, s, j;
+    	int min, max = 0, parity, s, j;
 
     /*Parity Bit Calculation */
     for (i = 1; i <= m + r; i = pow (2, d1))
