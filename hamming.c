@@ -16,7 +16,7 @@ int main(){
 	>Onde r é o número de bits redudantes
 	>m é número de bits de dados
 	*/
-	while (m + r + 1 > pow(2, r))
+	while (m + r + 1 >= pow(2, r))
 	{
 		r++;
 	}
