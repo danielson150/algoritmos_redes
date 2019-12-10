@@ -29,7 +29,7 @@ int main()
       G(x): Polimônio Gerador
       R: Grau de G(x)
       */
-	string mx , gx , encoded = "";
+	string mx, gx, r, encoded = "";
 	cout<<endl<<"-----------Remetente --------------"<<endl;
 	cout<<"Inserir bits de dados: "<<endl;
 	cin>>mx;														//bits de dados a serem transmitidos
@@ -41,8 +41,9 @@ int main()
 
 	int mxlen = mx.length(); //Guardar o tamanho da string de M(x)
 	int gxlen = gx.length(); //Guardar o tamanho da string de G(x)
+	r = gxlen - 1; //Grau de G(x): Quantidade de bits de G(x) - 1
 
-	for(int i=1 ; i <= (gxlen - 1) ; i++)
+	for(int i=1 ; i <= r ; i++)
 		encoded += '0';			//anexando comprimento de (gerador polinomial -1) número de zeros aos bits codificados
 
 	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter
@@ -71,6 +72,6 @@ int main()
 				return 0;
 			}
 
-	cout<<"Nenhum erro!"<<endl;												//bit a bit xor é realizado entre os bits recebidos e os bits crc do gerador
+	cout<<"Nenhum erro!"<<endl;		//bit a bit xor é realizado entre os bits recebidos e os bits crc do gerador
 	return 0;
 }
