@@ -1,8 +1,5 @@
 /*
 Verificação cíclica de redundância (CRC):
-Código de detecção de erros que são dados adicionais adicionados a uma determinada mensagem digital para nos ajudar a detectar se ocorreu algum erro durante a transmissão da mensagem.
-A abordagem básica usada para a detecção de erros é o uso de bits de redundância, onde bits adicionais são adicionados para facilitar a detecção de erros.
-
 */
 
 #include<iostream>
@@ -28,28 +25,32 @@ string xorfunction( string encoded , string crc)							//Operação XOR bit a bi
 
 int main()
 {
-	string data , crc , encoded = "";
+    /*M(x): Palavra inicial
+      G(x): Polimônio Gerador
+      R: Grau de G(x)
+      */
+	string mx , gx , encoded = "";
 	cout<<endl<<"-----------Remetente --------------"<<endl;
 	cout<<"Inserir bits de dados: "<<endl;
-	cin>>data;														//bits de dados a serem transmitidos
+	cin>>mx;														//bits de dados a serem transmitidos
 
 	cout<<"Digite o polimônio gerador: "<<endl;
-	cin>>crc;														//crc - polinômio do gerador
+	cin>>gx;														//crc - polinômio do gerador
 
-	encoded += data;			//bits codificados são inicializados em bits de dados
+	encoded += mx;			//bits codificados são inicializados em bits de dados
 
-	int datalen = data.length();
-	int crclen = crc.length();
+	int mxlen = mx.length(); //Guardar o tamanho da string de M(x)
+	int gxlen = gx.length(); //Guardar o tamanho da string de G(x)
 
-	for(int i=1 ; i <= (crclen - 1) ; i++)
+	for(int i=1 ; i <= (gxlen - 1) ; i++)
 		encoded += '0';			//anexando comprimento de (gerador polinomial -1) número de zeros aos bits codificados
 
-	encoded = xorfunction(encoded , crc);	//executando xor bit a bit para obter
+	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter
 
 	cout<<"A soma de verificação gerada é: ";
-	cout<<encoded.substr(encoded.length() - crclen + 1)<<endl<<endl;   //bits de dados + bit de soma de verificação é o que será enviado para o receptor
+	cout<<encoded.substr(encoded.length() - gxlen + 1)<<endl<<endl;   //bits de dados + bit de soma de verificação é o que será enviado para o receptor
 	cout<<"Mensagem a ser transmitida: ";
-	cout<<data + encoded.substr(encoded.length() - crclen + 1);    	//esta é a mensagem que será enviada ao receptor
+	cout<<mx + encoded.substr(encoded.length() - gxlen + 1);    	//esta é a mensagem que será enviada ao receptor
 
 
 
@@ -61,9 +62,9 @@ int main()
 	cout<<"Digite a mensagem recebida: "<<endl;             //O receptor entra na mensagem recebida
 	cin>>msg;
 
-	msg = xorfunction( msg , crc);
+	msg = xorfunction( msg , gx);
 
-	for( char i : msg.substr(msg.length() - crclen + 1))	//depois de executar xor, se os últimos bits forem zero, não haverá erro na transmissão
+	for( char i : msg.substr(msg.length() - gxlen + 1))	//depois de executar xor, se os últimos bits forem zero, não haverá erro na transmissão
 		if( i != '0' )
 			{
 				cout<<"Erro na transmissão!!! "<<endl;	//se bits não forem zero; ERRO NA TRANSMISSÃO
