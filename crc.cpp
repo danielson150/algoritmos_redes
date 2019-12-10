@@ -16,10 +16,10 @@ int main()
       */
 	string mx, gx, encoded = "";
 	cout<<endl<<"-----------Transmissor --------------"<<endl;
-	cout<<"Inserir bits de dados: "<<endl;
+	cout<<"Inserir a palavra inicial em bits M(X): "<<endl;
 	cin>>mx;														//bits de dados a serem transmitidos
 
-	cout<<"Digite o polimônio gerador: "<<endl;
+	cout<<"Digite o polimônio gerador em bits G(X): "<<endl;
 	cin>>gx;														//g(x) - polinômio do gerador
 
 	encoded += mx;			//bits codificados são inicializados em bits de dados
@@ -36,6 +36,8 @@ int main()
 
 	cout<<"O resto da divisão (FCS) gerada pelo transmissor: ";
 	cout<<fcs<<endl<<endl;   //FCS
+	cout<<"O grau de G(x): ";
+	cout<<r<<endl<<endl;   //R: Grau de G(X)
 	cout<<"Mensagem a ser transmitida: ";
 	cout<<mx + fcs;   //M(x)+FCS esta é a mensagem que será enviada ao receptor
 
