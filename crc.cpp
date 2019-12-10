@@ -6,7 +6,7 @@ Verificação cíclica de redundância (CRC):
 
 using namespace std;
 
-string xorfunction( string encoded , string gx)							//Operação XOR bit a bit
+string xorfunction( string encoded , string gx)			//Operação XOR bit a bit
 {
 	int gxlen = gx.length();
 
@@ -47,11 +47,12 @@ int main()
 		encoded += '0';			//anexando comprimento de (gerador polinomial -1) número de zeros aos bits codificados
 
 	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter
+	string fcs = encoded.substr(encoded.length() - gxlen + 1); //Guarda o resto da divisão (FCS)
 
-	cout<<"A soma de verificação gerada é: ";
-	cout<<encoded.substr(encoded.length() - gxlen + 1)<<endl<<endl;   //bits de dados + bit de soma de verificação é o que será enviado para o receptor
+	cout<<"O resto da divisão (FCS) gerada é: ";
+	cout<<fcs<<endl<<endl;   //FCS
 	cout<<"Mensagem a ser transmitida: ";
-	cout<<mx + encoded.substr(encoded.length() - gxlen + 1);    	//esta é a mensagem que será enviada ao receptor
+	cout<<mx + fcs;   //M(x)+FCS esta é a mensagem que será enviada ao receptor
 
 
 
@@ -60,7 +61,7 @@ int main()
 
 
     	string msg;
-	cout<<"Digite a mensagem recebida: "<<endl;             //O receptor entra na mensagem recebida
+	cout<<"Digite a mensagem recebida: "<<endl;             //O receptor entra com a mensagem recebida
 	cin>>msg;
 
 	msg = xorfunction( msg , gx);
