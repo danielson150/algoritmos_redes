@@ -70,7 +70,7 @@ int main()
 	cout<<"O resto da divisão (FCS) gerada pelo receptor: ";
 	cout<<fcs_receiver<<endl<<endl;   //FCS
 
-	for( char i : fcs_receiver)
+	for( char i : fcs_receiver) ///Vai pecorrer a string com o resto da divisão da mensagem recebidida
 		if( i != '0' )
 			{
 				cout<<"#####Erro na transmissão!!!##### "<<endl;	//se bits não forem zero; ERRO NA TRANSMISSÃO
