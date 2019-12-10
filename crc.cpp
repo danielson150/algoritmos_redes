@@ -30,7 +30,7 @@ int main()
       R: Grau de G(x)
       */
 	string mx, gx, encoded = "";
-	cout<<endl<<"-----------Remetente --------------"<<endl;
+	cout<<endl<<"-----------Transmissor --------------"<<endl;
 	cout<<"Inserir bits de dados: "<<endl;
 	cin>>mx;														//bits de dados a serem transmitidos
 
@@ -49,7 +49,7 @@ int main()
 	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter
 	string fcs = encoded.substr(encoded.length() - gxlen + 1); //Guarda o resto da divisão (FCS)
 
-	cout<<"O resto da divisão (FCS) gerada é: ";
+	cout<<"O resto da divisão (FCS) gerada pelo transmissor: ";
 	cout<<fcs<<endl<<endl;   //FCS
 	cout<<"Mensagem a ser transmitida: ";
 	cout<<mx + fcs;   //M(x)+FCS esta é a mensagem que será enviada ao receptor
@@ -65,14 +65,18 @@ int main()
 	cin>>msg;
 
 	msg = xorfunction( msg , gx);
+	string fcs_receiver = msg.substr(msg.length() - gxlen + 1); //Guarda o resto da divisão (FCS)
 
-	for( char i : msg.substr(msg.length() - gxlen + 1))	//depois de executar xor, se os últimos bits forem zero, não haverá erro na transmissão
+	cout<<"O resto da divisão (FCS) gerada pelo receptor: ";
+	cout<<fcs_receiver<<endl<<endl;   //FCS
+
+	for( char i : fcs_receiver)
 		if( i != '0' )
 			{
-				cout<<"Erro na transmissão!!! "<<endl;	//se bits não forem zero; ERRO NA TRANSMISSÃO
+				cout<<"#####Erro na transmissão!!!##### "<<endl;	//se bits não forem zero; ERRO NA TRANSMISSÃO
 				return 0;
 			}
 
-	cout<<"Nenhum erro!"<<endl;		//bit a bit xor é realizado entre os bits recebidos e os bits crc do gerador
+	cout<<"*******Nenhum erro!!!*******"<<endl;		//bit a bit xor é realizado entre os bits recebidos e os bits crc do gerador
 	return 0;
 }
