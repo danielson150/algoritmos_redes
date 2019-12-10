@@ -6,15 +6,15 @@ Verificação cíclica de redundância (CRC):
 
 using namespace std;
 
-string xorfunction( string encoded , string crc)							//Operação XOR bit a bit
+string xorfunction( string encoded , string gx)							//Operação XOR bit a bit
 {
-	int crclen = crc.length();
+	int gxlen = gx.length();
 
-	for ( int i = 0 ; i <= (encoded.length() - crclen) ; )			// executando operação xor bit a bit
+	for ( int i = 0 ; i <= (encoded.length() - gxlen) ; )			// executando operação xor bit a bit
 	{																// " 0 xor 0 = 0"     " 1 xor 1 = 0 "
-		for( int j=0 ; j < crclen ; j++)							// " 0 xor 1 = 1 "    " 1 xor 0 = 1"
+		for( int j=0 ; j < gxlen ; j++)							// " 0 xor 1 = 1 "    " 1 xor 0 = 1"
 		{
-			encoded[i+j] = encoded[i+j] == crc[j] ? '0' : '1' ;			//se bit codificado e bit crc forem iguais, substitua-o por zero
+			encoded[i+j] = encoded[i+j] == gx[j] ? '0' : '1' ;			//se bit codificado e bit crc forem iguais, substitua-o por zero
 		}
 	for( ; i< encoded.length() && encoded[i] != '1' ; i++) ;
 
