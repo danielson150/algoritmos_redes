@@ -6,22 +6,7 @@ Verificação cíclica de redundância (CRC):
 
 using namespace std;
 
-string xorfunction( string encoded , string gx)			//Operação XOR bit a bit
-{
-	int gxlen = gx.length();
-
-	for ( int i = 0 ; i <= (encoded.length() - gxlen) ; )			// executando operação xor bit a bit
-	{									// " 0 xor 0 = 0"     " 1 xor 1 = 0 "
-		for( int j=0 ; j < gxlen ; j++)					// " 0 xor 1 = 1 "    " 1 xor 0 = 1"
-		{
-			encoded[i+j] = encoded[i+j] == gx[j] ? '0' : '1' ;	//se bit codificado e bit g(x) forem iguais, substitua-o por zero
-		}
-	for( ; i< encoded.length() && encoded[i] != '1' ; i++) ;
-
-	}
-
-	return encoded;
-}
+string xorfunction( string encoded , string gx); //Protótipo da função
 
 int main()
 {
@@ -35,7 +20,7 @@ int main()
 	cin>>mx;														//bits de dados a serem transmitidos
 
 	cout<<"Digite o polimônio gerador: "<<endl;
-	cin>>gx;														//crc - polinômio do gerador
+	cin>>gx;														//g(x) - polinômio do gerador
 
 	encoded += mx;			//bits codificados são inicializados em bits de dados
 
@@ -46,7 +31,7 @@ int main()
 	for(int i=1 ; i <= r ; i++)
 		encoded += '0';			//anexando comprimento de (gerador polinomial -1) número de zeros aos bits codificados
 
-	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter
+	encoded = xorfunction(encoded , gx);	//executando xor bit a bit para obter o FCS
 	string fcs = encoded.substr(encoded.length() - gxlen + 1); //Guarda o resto da divisão (FCS)
 
 	cout<<"O resto da divisão (FCS) gerada pelo transmissor: ";
@@ -79,4 +64,22 @@ int main()
 
 	cout<<"*******Nenhum erro!!!*******"<<endl;		//bit a bit xor é realizado entre os bits recebidos e os bits crc do gerador
 	return 0;
+}
+
+
+string xorfunction( string encoded , string gx)			//Operação XOR bit a bit
+{
+	int gxlen = gx.length();
+
+	for ( int i = 0 ; i <= (encoded.length() - gxlen) ; )			// executando operação xor bit a bit
+	{																// " 0 xor 0 = 0"     " 1 xor 1 = 0 "
+		for( int j=0 ; j < gxlen ; j++)							// " 0 xor 1 = 1 "    " 1 xor 0 = 1"
+		{
+			encoded[i+j] = encoded[i+j] == gx[j] ? '0' : '1' ;			//se bit codificado e bit g(x) forem iguais, substitua-o por zero
+		}
+	for( ; i< encoded.length() && encoded[i] != '1' ; i++) ;         
+
+	}
+
+	return encoded;
 }
