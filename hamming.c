@@ -9,10 +9,10 @@ int main(){
 	scanf("%d", &m);
 
 
-	printf("Qual a paridade? 1-IMPAR ou 0-PAR:\n");
+	printf("Qual a paridade? 1-IMPAR ou 2-PAR:\n");
 	scanf("%d", &esc_parity);
 
-	/*2 ^ r ≥ m + r + 1 (Fórmula)
+	/*2 ^ r = m + r + 1 (Fórmula)
 	>Onde r é o número de bits redudantes
 	>m é número de bits de dados
 	*/
@@ -79,7 +79,7 @@ int main(){
                   min = 1;
           }
 
-      if(esc_parity == 0){
+      if(esc_parity == 2){
       if (parity % 2 == 0) // Paridade PAR
       {
             data[i] = 0;
@@ -134,7 +134,7 @@ int main(){
         min = 1;
     }
 
-    if(esc_parity==0){
+    if(esc_parity==2){
      if (parity % 2 == 0) // Paridade PAR
     {
     err[ec]=0;
